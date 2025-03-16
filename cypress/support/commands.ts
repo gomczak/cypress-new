@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', (username, password) => {
-    cy.request({
+    cy.api({
         method: 'POST',
         url: 'http://localhost:4001/users/signin',
         body: {
@@ -15,8 +15,21 @@ Cypress.Commands.add('login', (username, password) => {
     cy.visit('')
 })
 
+Cypress.Commands.add('loginAndSaveToken', (username, password) => {
+    cy.api({
+        method: 'POST',
+        url: 'http://localhost:4001/users/signin',
+        body: {
+            username: username,
+            password: password
+        }
+    }).then((response) => {
+        cy.wrap(response.body.token).as('jwtToken')
+    })
+})
+
 Cypress.Commands.add('register', (user) => {
-    return cy.request({
+    return cy.api({
         method: 'POST',
         url: 'http://localhost:4001/users/signup',
         body: user
@@ -24,7 +37,7 @@ Cypress.Commands.add('register', (user) => {
 })
 
 Cypress.Commands.add('deleteUser', (username, token) => {
-    cy.request({
+    cy.api({
         method: 'DELETE',
         url: `http://localhost:4001/users/${username}`,
         headers: {
