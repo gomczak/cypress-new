@@ -11,3 +11,17 @@ Cypress.Commands.add('register', (user) => {
         expect(resp.status).to.eq(201)
     })
 })
+
+Cypress.Commands.add('login', (username, password) => {
+    cy.api({
+        method: 'POST',
+        url: `${BACKEND_URL}/users/signin`,
+        body: {
+            username: username,
+            password: password
+        }
+    }).then(resp => {
+        expect(resp.status).to.eq(200)
+        cy.wrap(resp.body.token).as('token')
+    })
+})
