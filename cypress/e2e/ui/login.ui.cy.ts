@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+import { getRandomUser } from "../../generators/userGenerator"
 import { loginPage } from "../../pages/loginPage"
 
 describe('Login page', () => {
@@ -9,14 +10,14 @@ describe('Login page', () => {
 
     it('should login successfully', () => {
         // given
-        // const user = generateUser()
-        // cy.register(user)
+        const user = getRandomUser()
+        cy.register(user)
 
         // when
-        loginPage.attemptLogin('admin', 'admin')
+        loginPage.attemptLogin(user.username, user.password)
 
         // then
-        cy.get('.mt-1').should('have.text', 'awesome@testing.com')
+        cy.get('.mt-1').should('have.text', user.email)
     })
 
     it('should fail to login', () => {
