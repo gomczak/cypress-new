@@ -19,7 +19,9 @@ describe('Navbar tests', () => {
     })
 
     afterEach(() => {
-        // usuwanie uzytkownika przez API
+        cy.get('@token').then(token => {
+            cy.deleteUser(user.username, `${token}`)
+        })
     })
 
     it('should open products page', () => {
