@@ -1,15 +1,19 @@
 /// <reference types="cypress" />
 
+import { loginPage } from "../../pages/loginPage"
+
 describe('Login page', () => {
     beforeEach(() => {
         cy.visit('')
     })
 
     it('should login successfully', () => {
+        // given
+        // const user = generateUser()
+        // cy.register(user)
+
         // when
-        cy.get('#username').type('admin')
-        cy.get('#password').type('admin')
-        cy.get('button').contains('Sign in').click()
+        loginPage.attemptLogin('admin', 'admin')
 
         // then
         cy.get('.mt-1').should('have.text', 'awesome@testing.com')
@@ -17,9 +21,7 @@ describe('Login page', () => {
 
     it('should fail to login', () => {
         // when
-        cy.get('#username').type('wrong')
-        cy.get('#password').type('wrong')
-        cy.get('button').contains('Sign in').click()
+        loginPage.attemptLogin('wrong', 'wrong')
 
         // then
         cy.get('._description_gmcqp_50').should('have.text', 'Invalid username/password')
