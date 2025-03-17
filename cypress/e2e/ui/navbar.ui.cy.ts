@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { getRandomUser } from "../../generators/userGenerator"
+import { cartMocks } from "../../mocks/cartMocks"
 import { navbar } from "../../pages/components/navbar"
 import { loginPage } from "../../pages/loginPage"
 import { User } from "../../types/user"
@@ -15,7 +16,6 @@ describe('Navbar tests', () => {
         cy.get('@token').then(token => {
             localStorage.setItem('token', `${token}`)
         })
-        cy.visit('')
     })
 
     afterEach(() => {
@@ -23,6 +23,9 @@ describe('Navbar tests', () => {
     })
 
     it('should open products page', () => {
+        // given
+        cy.visit('')
+
         // when
         navbar.clickMenuItem('Products')
 
@@ -32,6 +35,9 @@ describe('Navbar tests', () => {
     })
 
     it('should open profile page', () => {
+        // given
+        cy.visit('')
+
         // when
         navbar.clickName(`${user.firstName} ${user.lastName}`)
 
@@ -43,6 +49,9 @@ describe('Navbar tests', () => {
     })
 
     it('should logout', () => {
+        // given
+        cy.visit('')
+
         // when
         navbar.clickLogout()
 
@@ -51,11 +60,14 @@ describe('Navbar tests', () => {
         cy.get('button').contains('Sign in').should('be.visible')
     })
 
-    it.only('should display correct number of cart items', () => {
+    it('should display correct number of cart items', () => {
         // given
-        
+        const expectedNumberOfItems = 9
+        cartMocks.mockCartWithNItems(user.username, expectedNumberOfItems)
+        cy.visit('')
+
         // then
-        
+        cy.get('[data-testid=desktop-cart-icon] span').should('have.text', expectedNumberOfItems)
     })
 
 })
