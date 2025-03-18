@@ -14,7 +14,7 @@ const generateString = (generator: () => string): string => {
     return 'default';
 };
 
-export const getRandomUser = (): User => {
+export const getRandomUser = (roles = [Roles.ROLE_ADMIN, Roles.ROLE_CLIENT]): User => {
     const username = generateString(() => faker.internet.username());
     const password = faker.internet.password({ length: 8 });
     const firstName = generateString(() => faker.person.firstName());
@@ -27,6 +27,6 @@ export const getRandomUser = (): User => {
         firstName,
         lastName,
         email,
-        roles: [Roles.ROLE_ADMIN, Roles.ROLE_CLIENT]
+        roles
     };
 };
