@@ -1,37 +1,39 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+import { BACKEND_URL } from "../utils/constants"
+
+Cypress.Commands.add('register', (user) => {
+    cy.api({
+        method: 'POST',
+        url: `${BACKEND_URL}/users/signup`,
+        body: user
+    }).then(resp => {
+        expect(resp.status).to.eq(201)
+    })
+})
+
+Cypress.Commands.add('login', (username, password) => {
+    cy.api({
+        method: 'POST',
+        url: `${BACKEND_URL}/users/signin`,
+        body: {
+            username: username,
+            password: password
+        }
+    }).then(resp => {
+        expect(resp.status).to.eq(200)
+        cy.wrap(resp.body.token).as('token')
+    })
+})
+
+Cypress.Commands.add('deleteUser', (username, token) => {
+    cy.api({
+        method: 'DELETE',
+        url: `${BACKEND_URL}/users/${username}`,
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(resp => {
+        expect(resp.status).to.eq(204)
+    })
+})
