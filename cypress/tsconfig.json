@@ -7,11 +7,17 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "moduleResolution": "node",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "types": [
       "cypress",
-      // "@percy/cypress"
-      ]
+      "@percy/cypress"
+    ]
   },
-  "include": ["**/*.js", "**/*.ts"]
+  "include": [
+    "**/*.js",
+    "**/*.ts"
+  ]
 }

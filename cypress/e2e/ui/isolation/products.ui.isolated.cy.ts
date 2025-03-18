@@ -23,5 +23,6 @@ describe('Products page tests in isolation', () => {
             const names = products.map(it => it.name)
             expect(names).to.contain($el.text())
         })
+        cy.percySnapshot('ProductsPage')
     })
 })

@@ -14,7 +14,8 @@ describe('Register tests in isolation', () => {
         // given
         const user = getRandomUser()
         registerMocks.mockSuccess()
-
+        cy.get('#username').should('be.visible')
+        cy.percySnapshot('RegsterPage')
         // when
         registerPage.attemptRegister(user)
 
