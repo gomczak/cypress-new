@@ -2,7 +2,6 @@ name: Cypress CI
 
 on: 
     push:
-      branches: [ main, master, kot10 ]
     workflow_dispatch:
 
 jobs:
