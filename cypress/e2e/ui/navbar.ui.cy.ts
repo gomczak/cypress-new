@@ -72,4 +72,18 @@ describe('Navbar tests', () => {
         cy.get('[data-testid=desktop-cart-icon] span').should('have.text', expectedNumberOfItems)
     })
 
+    it.only('should logout on mobile view', () => {
+        // given
+        cy.viewport(393, 852) // iphone 15
+        cy.visit('')
+
+        // when
+        navbar.clickMobileHamburgerMenu()
+        navbar.clickLogoutMenu()
+
+        // then
+        cy.url().should('contain', '/login')
+        cy.get('button').contains('Sign in').should('be.visible')
+    })
+
 })

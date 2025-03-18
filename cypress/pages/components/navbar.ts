@@ -10,6 +10,14 @@ export const navbar = {
 
     clickLogout: () => {
         cy.get('button').contains('Logout').click()
+    },
+
+    clickMobileHamburgerMenu: () => {
+        cy.get('.lucide-menu').click()
+    },
+
+    clickLogoutMenu: () => {
+        cy.get('[data-testid="mobile-menu"]').contains('Logout').click()
     }
 
 }
