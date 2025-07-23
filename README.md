@@ -1,6 +1,6 @@
 # Cypress Advanced E2E & API tests with CI pipeline
 
-**Created for educational use as part of 'Cypress test automation - advanced level' (CanTest IT) training.**
+*Created for educational use as part of 'Cypress test automation - advanced level' (CanTest IT) training.*
 
 
 ## Features
@@ -40,10 +40,9 @@ npx cypress run
 
 ## Continuous Integration
 
-> *Note: there is **simple CI/CD integration** (GitHub Actions) configured on master branch*
+> *Note: there is a **simple CI/CD integration** (GitHub Actions) configured on master branch*
 
-To check out CI support:
-switch branch to `develop` or [click here](https://github.com/gomczak/cypress-new/blob/develop/.github/workflows/ci.yml)
+To check out more switch branch to `develop` or [click here](https://github.com/gomczak/cypress-new/blob/develop/.github/workflows/ci.yml)
 
 All workflow runs and their details **[here](https://github.com/gomczak/cypress-new/actions)**.
 
