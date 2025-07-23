@@ -1,4 +1,4 @@
-# Cypress Advanced E2E & API with CI pipeline
+# Cypress Advanced E2E & API tests with CI pipeline
 
 **Created for educational use as part of 'Cypress test automation - advanced level' (CanTest IT) training.**
 
